@@ -1,0 +1,9 @@
+BinSemaphoreWhile działa dobrze, zapewnia on, że tylko jeden wątek ma dostęp do zmiennej w danym czasie.
+BinSemaphoreIf jest nieprzewidywalny przez wykorzystanie instrukcji if zamiast pętli while.
+
+Ze względu na implementację może zdarzyć się taka sytuacja:
+1) Wątek T1 rozpoczyna operację P()
+2) T3 wykonuje operację V(), używa notify() i budzi wątek T2 oraz ustawia state = true
+3) T1 wykonuje metodę P(), nie wchodzi on do if'a, ponieważ T3 ustawił state = true, zwolnił dostęp do pamięci, ustawia state = false
+4) T2 kończy metodę P(), ponieważ został wybudzony przez wątek T3, brak pętli while sprawia że wątek nie zostaje ponownie "uśpiony" pomimo state == false
+5) Wątki T1, T2 nie synchronizują się przez co otrzymujemy błędny wynik

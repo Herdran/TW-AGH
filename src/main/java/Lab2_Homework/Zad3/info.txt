@@ -1,0 +1,2 @@
+"Czy semafor binarny jest szczególnym przypadkiem semafora ogólnego? Dlaczego?"
+Tak, semafor ogólny z liczbą zasobów rowną 1 zachowuje się jak semafor binarny, pozwala na operacje tylko jednemu wątkowi w danym czasie
