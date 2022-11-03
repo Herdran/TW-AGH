@@ -25,19 +25,21 @@ colors = ["blue", "red", "green"]
 for key in results.keys():
     ind = np.arange(len(results[key][1]))
     width = 0.3
+    barCount = len(results[key]) // 2
     fig = plt.figure(figsize=(11, 9))
 
-    for i in range(1, len(results[key]), 2):
-        plt.bar(ind + ((i - 1) // 2) * width, results[key][i], color=colors[((i - 1) // 2)], width=width)
+    for i in range(barCount):
+        plt.bar(ind + i * width, results[key][i * 2 + 1], color=colors[i], width=width)
 
-    plt.xticks(ind + width / 2, ind)
+    plt.xticks(ind + (width / 2) * (barCount - 1), ind)
 
     plt.xlabel("Philosophers Id")
     plt.ylabel("Average wait time")
 
     labels = results[key][::2]
-    handles = [plt.Rectangle((0, 0), 1, 1, color=colors[i]) for i in range(len(results[key]) // 2)]
+    handles = [plt.Rectangle((0, 0), 1, 1, color=colors[i]) for i in range(barCount)]
     plt.legend(handles, labels)
-
+    plt.grid(linestyle="--")
     plt.title(key)
-    plt.show()
+    # plt.show()
+    plt.savefig(os.getcwd() + "\\plots\\" + key + ".png")
