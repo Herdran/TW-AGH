@@ -16,7 +16,7 @@ class SharedResource {
         System.out.printf("Thread %d accesses the resource\n", Thread.currentThread().getId());
 
         try {
-            Thread.sleep(new Random().nextInt(1, 100)); // Random sleep simulating activity
+            Thread.sleep(new Random().nextInt(100)); // Random sleep simulating activity
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
